@@ -47,6 +47,10 @@ python3 zipcracker.py
 
 sudo apt install p7zip-full
 
+-p : adicione sua senha
+archive.zip: nome do zip
+file1.txt: o arquivo que vc deseja compactar (tem que estar no diretório atual)
+
 7z a -tzip -mem=AES256 -pSENHAAQUI archive.zip file1.txt
 
 # 8. Usando o programa
