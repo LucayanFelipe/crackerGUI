@@ -3,7 +3,7 @@
 Baixe uma ISO de Ubuntu Desktop (ou outra distro Linux de sua escolha).
 No VirtualBox, crie uma nova VM:
 Tipo: Linux
-Versão: Ubuntu (64-bit)
+Versão: Other linux (64-bit)
 Memória RAM: pelo menos 2GB
 Disco: 20GB dinâmico
 Monte a ISO no Optical Drive da VM e inicie a instalação.
@@ -11,7 +11,7 @@ Instale o sistema normalmente.
 
 # 2. Atualizar o sistema
 
-Após logar no Ubuntu, abra o terminal:
+Após logar no linux, abra o terminal:
 sudo apt update && sudo apt upgrade -y
 
 # 3. Instalar dependências básicas
