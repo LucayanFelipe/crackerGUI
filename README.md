@@ -1,3 +1,7 @@
+# acadêmicos
+Lucayan Felioe Teixeira da Silva
+Theo Theodoro Novais
+
 # 1. Criar a máquina virtual
 
 Baixe uma ISO de Ubuntu Desktop (ou outra distro Linux de sua escolha).
