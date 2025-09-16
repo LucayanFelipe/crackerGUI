@@ -40,12 +40,7 @@ Dentro do venv instale:
 pip install --upgrade pip   
 pip install pyzipper
 
-# 7. Rodar o programa
-
-Dentro do venv rode o programa:   
-python3 zipcracker.py
-
-# 8. criar um zip com senha para testar
+# 7. criar um zip com senha para testar
 
 baixe o p7zip para zipar:   
 sudo apt install p7zip-full
@@ -56,9 +51,12 @@ no terminal compacte o arquivo usando:
 archive.zip: nome do zip
 file1.txt: o arquivo que vc deseja compactar (tem que estar no diretório atual)
 
+# 8. Rodar o programa
 
+Dentro do venv rode o programa:   
+python3 zipcracker.py
 
-# 8. Usando o programa
+# 9. Usando o programa
 
 Clique em Selecionar ZIP → escolha o arquivo .zip protegido por senha.
 Clique em Adicionar Dicionário → selecione um arquivo .txt contendo as senhas (uma por linha).
@@ -67,3 +65,9 @@ Clique em Iniciar Ataque.
 A barra de progresso vai atualizar e você vai ver a senha testada em tempo real.
 Se encontrar, aparece a mensagem:
 👉 "Hackeado com sucesso meu patrão, senha do arquivo: {senha}"
+
+# 10. executar na Maquina virtual
+
+Lembre-se de executar via VENV toda vez que precisar executar:     
+python3 -m venv venv      
+source venv/bin/activate   
