@@ -20,8 +20,8 @@ sudo apt update && sudo apt upgrade -y
 
 # 3. Instalar dependências básicas
 
-Você vai precisar de Python, pip, Tkinter e compiladores básicos:
-sudo apt install -y python3 python3-venv python3-tk python3-dev build-essential
+Você vai precisar de Python, pip, Tkinter e compiladores básicos, use os comandos no cli:   
+sudo apt install -y python3 python3-     venv python3-tk python3-dev build-essential
 
 # 4. Criar a pasta do projeto
 
@@ -29,8 +29,7 @@ coloque o programa zipcracker.py na mesma raiz do arquivo zip que deseja quebrar
 
 # 5. Criar e ativar o ambiente virtual (venv)
 
-python3 -m venv venv
-
+python3 -m venv venv    
 source venv/bin/activate
 
 Agora o terminal vai mostrar algo tipo (venv) no começo → significa que você está dentro do ambiente virtual.
@@ -38,24 +37,26 @@ Agora o terminal vai mostrar algo tipo (venv) no começo → significa que você
 # 6. Instalar dependências no venv
 
 Dentro do venv instale:
-pip install --upgrade pip
-
+pip install --upgrade pip   
 pip install pyzipper
 
 # 7. Rodar o programa
 
-Dentro do venv rode o programa:
+Dentro do venv rode o programa:   
 python3 zipcracker.py
 
 # 8. criar um zip com senha para testar
 
+baixe o p7zip para zipar:   
 sudo apt install p7zip-full
 
+no terminal compacte o arquivo usando:  
+7z a -tzip -mem=AES256 -pSENHAAQUI archive.zip file1.txt  
 -p : adicione sua senha
 archive.zip: nome do zip
 file1.txt: o arquivo que vc deseja compactar (tem que estar no diretório atual)
 
-7z a -tzip -mem=AES256 -pSENHAAQUI archive.zip file1.txt
+
 
 # 8. Usando o programa
 
