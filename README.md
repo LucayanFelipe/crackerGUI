@@ -21,27 +21,33 @@ sudo apt install -y python3 python3-venv python3-tk python3-dev build-essential
 
 # 4. Criar a pasta do projeto
 
-mkdir ~/zipcracker
-cd ~/zipcracker
-coloque aqui o programa zipcracker.py
+coloque o programa zipcracker.py na mesma raiz do arquivo zip que deseja quebrar
 
 # 5. Criar e ativar o ambiente virtual (venv)
 
 python3 -m venv venv
-Ative:
+
 source venv/bin/activate
+
 Agora o terminal vai mostrar algo tipo (venv) no começo → significa que você está dentro do ambiente virtual.
 
 # 6. Instalar dependências no venv
 
 Dentro do venv instale:
 pip install --upgrade pip
+
 pip install pyzipper
 
 # 7. Rodar o programa
 
 Dentro do venv rode o programa:
 python3 zipcracker.py
+
+# 8. criar um zip com senha para testar
+
+sudo apt install p7zip-full
+
+7z a -tzip -mem=AES256 -pSENHAAQUI archive.zip file1.txt
 
 # 8. Usando o programa
 
