@@ -3,7 +3,8 @@ import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 import threading
 import os
-import tempfile  
+import tempfile
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
 def ataque_dicionario_aes(zip_path, dicionarios, progresso_callback=None, senha_atual_callback=None):
@@ -20,9 +21,13 @@ def ataque_dicionario_aes(zip_path, dicionarios, progresso_callback=None, senha_
         senhas = ["123", "senha", "teste"]
 
     total = len(senhas)
+    encontrado = threading.Event()  # sinal para parar as threads
+    resultado = [None]  # container mutável para guardar a senha
 
-    for i, senha in enumerate(senhas, 1):
-        senha_bytes = senha.strip().encode("utf-8")  # garante bytes e remove espaços
+    def testar_senha(i, senha):
+        if encontrado.is_set():
+            return None  # já achou, não precisa mais
+        senha_bytes = senha.strip().encode("utf-8")
 
         # Atualiza senha atual
         if senha_atual_callback:
@@ -30,20 +35,29 @@ def ataque_dicionario_aes(zip_path, dicionarios, progresso_callback=None, senha_
 
         try:
             with pyzipper.AESZipFile(zip_path) as zf:
-                # Usar pasta temporária para extrair e evitar Permission denied
                 with tempfile.TemporaryDirectory() as tmpdir:
-                    # Extrai todos os arquivos para tmpdir
                     zf.extractall(path=tmpdir, pwd=senha_bytes)
-                    # Senha correta encontrada
+                    encontrado.set()
+                    resultado[0] = senha
                     return senha
         except RuntimeError:
-            pass  # senha errada, continuar
+            pass
         except Exception as e:
             print(f"[!] Erro inesperado com '{senha}': {e}")
 
         # Atualiza progresso
         if progresso_callback:
             progresso_callback(i, total)
+        return None
+
+    # Número de threads = núcleos do SO
+    n_threads = os.cpu_count() or 4
+
+    with ThreadPoolExecutor(max_workers=n_threads) as executor:
+        futures = [executor.submit(testar_senha, i, senha) for i, senha in enumerate(senhas, 1)]
+        for future in as_completed(futures):
+            if future.result():
+                return future.result()
 
     return "Senha não encontrada"
 
@@ -133,4 +147,3 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = ZipCrackerGUI(root)
     root.mainloop()
-
